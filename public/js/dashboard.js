@@ -37,10 +37,15 @@ const delButtonHandler = async (event) => {
   }
 };
 
-document
+if(document.querySelector('.new-post-form')){
+
+  document
   .querySelector('.new-post-form')
   .addEventListener('submit', newFormHandler);
+}
+if(document.querySelector('.post-list')){
 
-document
+  document
   .querySelector('.post-list')
   .addEventListener('click', delButtonHandler);
+}
