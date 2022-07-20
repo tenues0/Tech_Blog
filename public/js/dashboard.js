@@ -43,6 +43,7 @@ if(document.querySelector('.new-post-form')){
   .querySelector('.new-post-form')
   .addEventListener('submit', newFormHandler);
 }
+
 if(document.querySelector('.post-list')){
 
   document

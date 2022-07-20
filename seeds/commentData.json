@@ -1,0 +1,17 @@
+[
+    {
+        "content": "I'm finally starting to understand this",
+        "user_id": 2,
+        "post_id": 1
+    },
+    {
+        "content": "Important info about SQL!",
+        "user_id": 1,
+        "post_id": 3
+    },
+    {
+        "content": "praying this works!",
+        "user_id": 3,
+        "post_id": 6
+    }
+]

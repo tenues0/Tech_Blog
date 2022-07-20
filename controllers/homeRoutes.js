@@ -11,13 +11,18 @@ router.get('/', async (req, res) => {
           model: User,
           attributes: ['username'],
         },
+        {
+          model: Comments,
+          include: {model: User, attributes: ['username']},
+          attributes: ['content', 'date_created','id']
+        }
       ],
     });
 
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    console.log("post", posts);
+    console.log("********posts", posts);
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
@@ -33,31 +38,24 @@ router.get('/post/:id', async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       include: [
-        // {
-        //   model: Comments,
-        //   attributes: ['id', 'content', 'user_id', 'post_id'],
-        //   include: {
-        //     model: User,
-        //     attributes: ['username'],
-        //   }
-        // },
         {
           model: User,
           attributes: ['username'],
         },
         {
-          model: Comments
+          model: Comments,
+          include: {model: User, attributes: ['username']},
+          attributes: ['content', 'date_created','id']
         }
       ],
     });
 
     const post = postData.get({ plain: true });
     
-    console.log(post)
+    console.log("*********router.get('/post/:id'" ,post)
 
     res.render('post', {
       ...post,
-      // post
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -71,11 +69,13 @@ router.get('/dashboard', withAuth, async (req, res) => {
     // Find the logged in user based on the session ID
     const userData = await User.findByPk(req.session.user_id, {
       attributes: { exclude: ['password'] },
-      include: [{ model: Post }],
+      include: [
+        { model: Post }, {model: Comments}],
     });
 
     const user = userData.get({ plain: true });
-    console.log("user", user);
+    console.log("router.get('/dashboard' was triggered)")
+    console.log("*********user", user);
 
     res.render('dashboard', {
       ...user,
