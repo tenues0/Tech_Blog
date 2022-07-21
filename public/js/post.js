@@ -2,7 +2,7 @@ const newFormHandler = async (event) => {
     event.preventDefault();
     const content = document.querySelector('#comment-content').value.trim();
 
-    const id = event.target.getAttribute('data-id');
+    const id = event.target.getAttribute('post-id');
 
     console.log("content", content);
 

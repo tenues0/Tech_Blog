@@ -1,5 +1,5 @@
 <div class="text-center">
-  <h2><a href="/post/{{id}}">{{title}}</a></h2>
+  <h2><a href="/post/{{id}}" class='post-id' id="{{id}}">{{title}}</a></h2>
   <p>{{content}}</p>
   <p>Created by {{user.username}} on {{format_date date_created}}</p>
 </div>
@@ -37,5 +37,41 @@
   </form>
 </div>
 
+{{!-- This script is not being read for some reason --}}
+{{!-- <script src="./js/post.js"></script> --}}
 
-<script src="../public/js/post.js"></script>
+<script>
+  const newFormHandler = async (event) => {
+    event.preventDefault();
+    const content = document.querySelector('#comment-content').value.trim();
+
+    const post_id = document.querySelector('.post-id').id;
+    console.log(post_id)
+    console.log("content from user comment submission: ", content);
+
+    if ( content ) {
+    const response = await fetch(`/api/comments`, {
+        method: 'POST',
+        body: JSON.stringify({ content, post_id }),
+        headers: {
+        'Content-Type': 'application/json',
+        },
+    });
+
+    if (response.ok) {
+        document.location.replace(`/post/${post_id}`);
+    } else {
+        alert('Failed to create comment');
+    }
+    }
+    
+};
+  
+if(document.querySelector('.new-comment-form')){
+
+document
+.querySelector('.new-comment-form')
+.addEventListener('submit', newFormHandler);
+}
+
+</script>
