@@ -5,7 +5,6 @@
 </div>
 
 <div>
-  <h3>This is the place I wish the comments would appear!</h3>
   {{#if comments}}
   <div class="col-md-6 comment-list">
     <h3>Current Comments:</h3>
@@ -16,9 +15,9 @@
         {{!-- <h4><a href="/comments/{{comment.id}}">{{comment.user_id}}</a></h4> --}}
         <p>{{comment.content}}</p>
       </div>
-      <div class="col-md-4">
+      {{!-- <div class="col-md-4">
         <button class="btn btn-sm btn-danger" data-id="{{comment.id}}">DELETE</button>
-      </div>
+      </div> --}}
     </div>
     {{/each}}
   </div>
