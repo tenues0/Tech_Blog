@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
     // Serialize data so the template can read it
     const posts = postData.map((post) => post.get({ plain: true }));
 
-    console.log("********posts", posts);
+    // console.log("********posts", posts);
 
     // Pass serialized data and session flag into template
     res.render('homepage', { 
@@ -52,7 +52,7 @@ router.get('/post/:id', async (req, res) => {
 
     const post = postData.get({ plain: true });
     
-    console.log("*********router.get('/post/:id'" ,post)
+    // console.log("*********router.get('/post/:id'" ,post)
     // console.log("viewing the post json object")
     // console.log(post.comments[0].user.username)
 
@@ -84,7 +84,7 @@ router.get('/editpost/:id', withAuth, async (req, res) => {
     });
 
     const post = postData.get({ plain: true });
-    console.log("router.get('/editpost/:id'")
+    // console.log("router.get('/editpost/:id'")
 
     res.render('editpost', {
       ...post,
@@ -106,8 +106,9 @@ router.get('/dashboard', withAuth, async (req, res) => {
     });
 
     const user = userData.get({ plain: true });
-    console.log("router.get('/dashboard' was triggered)")
-    console.log("*********user", user);
+
+    // console.log("router.get('/dashboard' was triggered)")
+    // console.log("*********user", user);
 
     res.render('dashboard', {
       ...user,
