@@ -53,8 +53,40 @@ router.get('/post/:id', async (req, res) => {
     const post = postData.get({ plain: true });
     
     console.log("*********router.get('/post/:id'" ,post)
+    // console.log("viewing the post json object")
+    // console.log(post.comments[0].user.username)
 
     res.render('post', {
+      ...post,
+      logged_in: req.session.logged_in
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+
+
+router.get('/editpost/:id', withAuth, async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+        {
+          model: Comments,
+          include: {model: User, attributes: ['username']},
+          attributes: ['content', 'date_created','id']
+        }
+      ],
+    });
+
+    const post = postData.get({ plain: true });
+    console.log("router.get('/editpost/:id'")
+
+    res.render('editpost', {
       ...post,
       logged_in: req.session.logged_in
     });
