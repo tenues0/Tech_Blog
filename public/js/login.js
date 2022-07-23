@@ -28,6 +28,8 @@ const signupFormHandler = async (event) => {
   const username = document.querySelector('#name-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
 
+  console.log(username, password);
+
   if (username && password) {
     const response = await fetch('/api/users', {
       method: 'POST',
@@ -43,10 +45,16 @@ const signupFormHandler = async (event) => {
   }
 };
 
+let login = document.querySelector('.login-form');
+
+if (login){
 document
   .querySelector('.login-form')
   .addEventListener('submit', loginFormHandler);
-
-document
+} else {
+  document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);
+}
+
+
