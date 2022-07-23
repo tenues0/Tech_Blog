@@ -40,7 +40,7 @@
     if ( title && content ) {
       const response = await fetch(`/api/posts/${post_id}`, {
         method: 'PUT',
-        body: JSON.stringify({ title, content, post_id }),
+        body: JSON.stringify({ title, content }),
         headers: {
           'Content-Type': 'application/json',
         },

@@ -20,12 +20,16 @@ router.put('/:id', withAuth, async (req, res) => {
   console.log("****req.body from PUT REQUEST****", req.body)
   try {
     const editpost = await Post.update({
-      where: {
-        user_id: req.session.user_id,
-        title: req.body.title,
-        content: req.body.content,
-        id: req.body.post_id,
-      },
+      title: req.body.title,
+      content: req.body.content,
+    },{
+             where: {id: req.params.id}
+             //{
+      //   user_id: req.session.user_id,
+      //  // title: req.body.title,
+      //  // title: req.body.title,
+      //   id: req.body.post_id,
+       //},
     });
 
     if (!editpost) {
